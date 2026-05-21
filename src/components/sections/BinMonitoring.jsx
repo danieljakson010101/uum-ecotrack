@@ -294,7 +294,9 @@ const BinMonitoring = () => {
       <SectionLabel title="Smart Bin Monitoring" subtitle="Real-time IoT sensor data — fill level, weight and temperature" />
 
       {/* Filter bar */}
-      <div style={{ display: "flex", gap: 8, marginBottom: 20, flexWrap: "wrap", alignItems: "center" }}>
+      <div style={{ display: "flex", alignItems: "center", gap: 32, marginBottom: 20, flexWrap: "wrap" }}>
+
+        {/* Area filters — box 1 */}
         <div style={{ display: "flex", gap: 4, background: C.surfaceAlt, borderRadius: 10, padding: 4, border: `1px solid ${C.border}` }}>
           {[["all", "All"], ["academic", "🏛 Academic"], ["inasis", "🏠 INASIS"]].map(([val, lbl]) => (
             <button key={val} onClick={() => setAreaFilter(val)} style={{
@@ -305,17 +307,21 @@ const BinMonitoring = () => {
             }}>{lbl}</button>
           ))}
         </div>
-        {["all", "critical", "fire", "warning", "moderate", "good"].map(s => (
-          <button key={s} onClick={() => setFilter(s)} style={{
-            padding: "6px 14px", borderRadius: 8, fontSize: 11, fontWeight: 700, cursor: "pointer",
-            border:     `1px solid ${filter === s ? (STATUS[s]?.color || C.navy) : C.border}`,
-            background: filter === s ? (STATUS[s]?.bg || C.bluePale) : C.surface,
-            color:      filter === s ? (STATUS[s]?.color || C.navy) : C.textMuted,
-            letterSpacing: "0.04em",
-          }}>
-            {s === "all" ? "All Status" : STATUS[s]?.label || s}
-          </button>
-        ))}
+
+        {/* Status filters — box 2 */}
+        <div style={{ display: "flex", gap: 4, background: C.surfaceAlt, borderRadius: 10, padding: 4, border: `1px solid ${C.border}` }}>
+          {["all", "critical", "fire", "warning", "moderate", "good"].map(s => (
+            <button key={s} onClick={() => setFilter(s)} style={{
+              padding: "6px 14px", borderRadius: 7, fontSize: 11, fontWeight: 700, cursor: "pointer",
+              border: "none",
+              background: filter === s ? (s === "all" ? C.navy : (STATUS[s]?.bg || C.bluePale)) : "transparent",
+              color:      filter === s ? (s === "all" ? "#fff" : (STATUS[s]?.color || C.navy)) : C.textMuted,
+              letterSpacing: "0.04em",
+            }}>
+              {s === "all" ? "All Status" : STATUS[s]?.label || s}
+            </button>
+          ))}
+        </div>
       </div>
 
       {/* Bin grid */}

@@ -38,11 +38,44 @@ const Overview = ({ alerts, onViewAlerts }) => {
       )}
 
       {/* KPI row */}
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 14, marginBottom: 24 }}>
-        <KPICard icon="🗑️" label="Total Bins"    value={ALL_BINS.length}                                      unit="units"  delta={0} />
-        <KPICard icon="⚠️" label="Active Alerts" value={unread}                                               unit="alerts" delta={-8} />
-        <KPICard icon="📊" label="Avg Fill Level" value={avgFill}                                              unit="%"      delta={5} />
-        <KPICard icon="🚛" label="Active Trucks"  value={TRUCKS.filter(t => t.status !== "Idle").length}      unit="trucks" />
+      <div style={{ display: "grid", gridTemplateColumns: "2fr 1fr 1fr", gap: 14, marginBottom: 24 }}>
+
+        {/* Grouped card — Total Bins + Active Alerts */}
+        <Card style={{ padding: 20 }}>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 0, height: "100%" }}>
+            {/* Total Bins */}
+            <div style={{ paddingRight: 24, borderRight: `1px solid ${C.border}`, display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
+                <p style={{ color: C.textMuted, fontSize: 10, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", margin: 0 }}>Total Bins</p>
+                <div style={{ width: 36, height: 36, borderRadius: 10, background: C.bluePale, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 18 }}>🗑️</div>
+              </div>
+              <div style={{ margin: "12px 0 8px" }}>
+                <span style={{ fontSize: 32, fontWeight: 800, color: C.navy, fontFamily: "'Sora',sans-serif", lineHeight: 1 }}>{ALL_BINS.length}</span>
+                <span style={{ color: C.textMuted, fontSize: 14, marginLeft: 6 }}>units</span>
+              </div>
+              <span style={{ color: C.accentGreen, fontSize: 12, fontWeight: 700 }}>▲ 0% vs last week</span>
+            </div>
+
+            {/* Active Alerts */}
+            <div style={{ paddingLeft: 24, display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
+                <p style={{ color: C.textMuted, fontSize: 10, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", margin: 0 }}>Active Alerts</p>
+                <div style={{ width: 36, height: 36, borderRadius: 10, background: "#fff7ed", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 18 }}>⚠️</div>
+              </div>
+              <div style={{ margin: "12px 0 8px" }}>
+                <span style={{ fontSize: 32, fontWeight: 800, color: C.navy, fontFamily: "'Sora',sans-serif", lineHeight: 1 }}>{unread}</span>
+                <span style={{ color: C.textMuted, fontSize: 14, marginLeft: 6 }}>alerts</span>
+              </div>
+              <span style={{ color: C.accentRed, fontSize: 12, fontWeight: 700 }}>▼ 8% vs last week</span>
+            </div>
+          </div>
+        </Card>
+
+        {/* Avg Fill Level — unchanged */}
+        <KPICard icon="📊" label="Avg Fill Level" value={avgFill} unit="%" delta={5} />
+
+        {/* Active Trucks — unchanged */}
+        <KPICard icon="🚛" label="Active Trucks" value={TRUCKS.filter(t => t.status !== "Idle").length} unit="trucks" />
       </div>
 
       {/* Charts row */}
@@ -98,10 +131,10 @@ const Overview = ({ alerts, onViewAlerts }) => {
         </p>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 12 }}>
           {[
-            { label: "IoT Uptime",      val: "99.1%", ok: true  },
-            { label: "GPS Accuracy",    val: "98.6%", ok: true  },
-            { label: "Route Efficiency",val: "83.4%", ok: true  },
-            { label: "Sensor Battery",  val: "68%",   ok: false },
+            { label: "IoT Uptime",       val: "99.1%", ok: true  },
+            { label: "GPS Accuracy",     val: "98.6%", ok: true  },
+            { label: "Route Efficiency", val: "83.4%", ok: true  },
+            { label: "Sensor Battery",   val: "68%",   ok: false },
           ].map((s, i) => (
             <div key={i} style={{
               background: s.ok ? "#f0fdf4" : "#fffbeb",

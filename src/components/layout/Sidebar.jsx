@@ -2,7 +2,7 @@ import { C } from "../../constants/theme";
 import { COLLEGES, INASIS_ROUTES } from "../../constants/data";
 
 const NAV_ITEMS = [
-  { id: "overview",  icon: "⬡",  label: "Overview" },
+  { id: "overview",  icon: "🏡",  label: "Overview" },
   { id: "bins",      icon: "🗑️", label: "Bin Monitor" },
   { id: "routes",    icon: "🚛", label: "Routes" },
   { id: "analytics", icon: "📊", label: "Analytics" },
@@ -20,8 +20,8 @@ const Sidebar = ({ section, setSection, unreadAlerts, time }) => (
     <div style={{ padding: "28px 24px 22px", borderBottom: "1px solid rgba(255,255,255,0.08)" }}>
       <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
         <div style={{ width: 44, height: 44, borderRadius: 11, background: "#fff", display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden", flexShrink: 0 }}>
-            <img src="/logo.png" alt="EcoTrack UUM Logo" style={{ width: 40, height: 40, objectFit: "contain" }} />
-          </div>
+          <img src="/logo.png" alt="EcoTrack UUM Logo" style={{ width: 40, height: 40, objectFit: "contain" }} />
+        </div>
         <div>
           <div style={{ color: "#fff", fontFamily: "'Sora',sans-serif", fontWeight: 800, fontSize: 15, letterSpacing: "-0.01em" }}>EcoTrack UUM</div>
           <div style={{ color: "rgba(255,255,255,0.38)", fontSize: 10, marginTop: 2, letterSpacing: "0.05em" }}>SMART WASTE SYSTEM</div>
@@ -29,33 +29,8 @@ const Sidebar = ({ section, setSection, unreadAlerts, time }) => (
       </div>
     </div>
 
-    {/* Colleges */}
-    <div style={{ padding: "16px 22px", borderBottom: "1px solid rgba(255,255,255,0.07)" }}>
-      <p style={{ color: "rgba(255,255,255,0.35)", fontSize: 10, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 10 }}>Colleges</p>
-      {Object.entries(COLLEGES).map(([key, col]) => (
-        <div key={key} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 8 }}>
-          <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-            <div style={{ width: 8, height: 8, borderRadius: "50%", background: key === "CAS" ? "#3b8fe8" : key === "COB" ? "#6d9fd4" : "#a78bfa" }} />
-            <span style={{ color: "rgba(255,255,255,0.65)", fontSize: 12, fontWeight: 600 }}>{col.label}</span>
-          </div>
-          <span style={{ color: "rgba(255,255,255,0.3)", fontSize: 11 }}>{col.schools.length} schools</span>
-        </div>
-      ))}
-    </div>
-
-    {/* INASIS routes */}
-    <div style={{ padding: "14px 22px", borderBottom: "1px solid rgba(255,255,255,0.07)" }}>
-      <p style={{ color: "rgba(255,255,255,0.35)", fontSize: 10, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 10 }}>INASIS Routes</p>
-      {Object.entries(INASIS_ROUTES).map(([route, colleges]) => (
-        <div key={route} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 7 }}>
-          <span style={{ color: "rgba(255,255,255,0.55)", fontSize: 12 }}>{route}</span>
-          <span style={{ color: "rgba(255,255,255,0.3)", fontSize: 11 }}>{colleges.length} colleges</span>
-        </div>
-      ))}
-    </div>
-
-    {/* Navigation */}
-    <nav style={{ flex: 1, padding: "14px 12px" }}>
+    {/* Navigation — now at top */}
+    <nav style={{ padding: "14px 12px", borderBottom: "1px solid rgba(255,255,255,0.07)" }}>
       {NAV_ITEMS.map(item => {
         const active = section === item.id;
         return (
@@ -81,6 +56,31 @@ const Sidebar = ({ section, setSection, unreadAlerts, time }) => (
         );
       })}
     </nav>
+
+    {/* Colleges */}
+    <div style={{ padding: "16px 22px", borderTop: "1px solid rgba(255,255,255,0.07)" }}>
+      <p style={{ color: "rgba(255,255,255,0.35)", fontSize: 10, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 10 }}>Colleges</p>
+      {Object.entries(COLLEGES).map(([key, col]) => (
+        <div key={key} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 8 }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+            <div style={{ width: 8, height: 8, borderRadius: "50%", background: key === "CAS" ? "#3b8fe8" : key === "COB" ? "#6d9fd4" : "#a78bfa" }} />
+            <span style={{ color: "rgba(255,255,255,0.65)", fontSize: 12, fontWeight: 600 }}>{col.label}</span>
+          </div>
+          <span style={{ color: "rgba(255,255,255,0.3)", fontSize: 11 }}>{col.schools.length} schools</span>
+        </div>
+      ))}
+    </div>
+
+    {/* INASIS routes */}
+    <div style={{ padding: "14px 22px", borderTop: "1px solid rgba(255,255,255,0.07)" }}>
+      <p style={{ color: "rgba(255,255,255,0.35)", fontSize: 10, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 10 }}>INASIS Routes</p>
+      {Object.entries(INASIS_ROUTES).map(([route, colleges]) => (
+        <div key={route} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 7 }}>
+          <span style={{ color: "rgba(255,255,255,0.55)", fontSize: 12 }}>{route}</span>
+          <span style={{ color: "rgba(255,255,255,0.3)", fontSize: 11 }}>{colleges.length} colleges</span>
+        </div>
+      ))}
+    </div>
 
     {/* Live clock */}
     <div style={{ padding: "14px 24px 24px", borderTop: "1px solid rgba(255,255,255,0.07)" }}>
