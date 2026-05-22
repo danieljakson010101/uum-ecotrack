@@ -2,7 +2,7 @@ import { C } from "../../constants/theme";
 import { COLLEGES, INASIS_ROUTES } from "../../constants/data";
 
 const NAV_ITEMS = [
-  { id: "overview",  icon: "🏡",  label: "Overview" },
+  { id: "overview",  icon: "🏡",  label: "Home" },
   { id: "bins",      icon: "🗑️", label: "Bin Monitor" },
   { id: "routes",    icon: "🚛", label: "Routes" },
   { id: "analytics", icon: "📊", label: "Analytics" },

@@ -7,7 +7,7 @@ const Footer = () => (
     background: C.surface, display: "flex", justifyContent: "space-between", alignItems: "center",
   }}>
     <span style={{ color: C.textMuted, fontSize: 11 }}>
-      © 2025 UUM EcoTrack — Smart Waste Management System | Sintok, Kedah, Malaysia
+      © 2026 UUM EcoTrack — Smart Waste Management System | Sintok, Kedah, Malaysia
     </span>
     <div style={{ display: "flex", gap: 20 }}>
       {[

@@ -177,7 +177,6 @@ const DispatchModal = ({ bin, onClose }) => {
 
         <div style={{ padding: "22px 26px" }}>
           {dispatched ? (
-            /* Success state */
             <div style={{ textAlign: "center", padding: "24px 0" }}>
               <div style={{ fontSize: 56, marginBottom: 14 }}>✅</div>
               <h3 style={{ color: C.accentGreen, fontFamily: "'Sora',sans-serif", fontSize: 20, fontWeight: 800, margin: "0 0 8px" }}>Dispatched!</h3>
@@ -193,7 +192,6 @@ const DispatchModal = ({ bin, onClose }) => {
             </div>
           ) : (
             <>
-              {/* Priority note */}
               <div style={{
                 background: bin.fill > 80 ? "#fee2e2" : "#fef3c7",
                 border: `1px solid ${bin.fill > 80 ? C.accentRed : C.accentAmber}44`,
@@ -209,14 +207,13 @@ const DispatchModal = ({ bin, onClose }) => {
                 </p>
               </div>
 
-              {/* Truck list */}
               <p style={{ color: C.textMuted, fontSize: 11, fontWeight: 700, letterSpacing: "0.07em", textTransform: "uppercase", margin: "0 0 10px" }}>
                 Select Available Truck
               </p>
               <div style={{ display: "flex", flexDirection: "column", gap: 8, marginBottom: 20 }}>
                 {availableTrucks.map(truck => {
-                  const isSelected   = selectedTruck?.id === truck.id;
-                  const statusColor  = truck.status === "En Route" ? C.blue : C.textMuted;
+                  const isSelected  = selectedTruck?.id === truck.id;
+                  const statusColor = truck.status === "En Route" ? C.blue : C.textMuted;
                   return (
                     <div
                       key={truck.id}
@@ -245,7 +242,6 @@ const DispatchModal = ({ bin, onClose }) => {
                 })}
               </div>
 
-              {/* Actions */}
               <div style={{ display: "flex", gap: 10 }}>
                 <button onClick={onClose} style={{
                   flex: 1, padding: "11px 0", background: C.surfaceAlt,
@@ -293,10 +289,9 @@ const BinMonitoring = () => {
     <div>
       <SectionLabel title="Smart Bin Monitoring" subtitle="Real-time IoT sensor data — fill level, weight and temperature" />
 
-      {/* Filter bar */}
-      <div style={{ display: "flex", alignItems: "center", gap: 32, marginBottom: 20, flexWrap: "wrap" }}>
+      {/* Filter bar — marginBottom 20 → 12 */}
+      <div style={{ display: "flex", alignItems: "center", gap: 32, marginBottom: 12, flexWrap: "wrap" }}>
 
-        {/* Area filters — box 1 */}
         <div style={{ display: "flex", gap: 4, background: C.surfaceAlt, borderRadius: 10, padding: 4, border: `1px solid ${C.border}` }}>
           {[["all", "All"], ["academic", "🏛 Academic"], ["inasis", "🏠 INASIS"]].map(([val, lbl]) => (
             <button key={val} onClick={() => setAreaFilter(val)} style={{
@@ -308,7 +303,6 @@ const BinMonitoring = () => {
           ))}
         </div>
 
-        {/* Status filters — box 2 */}
         <div style={{ display: "flex", gap: 4, background: C.surfaceAlt, borderRadius: 10, padding: 4, border: `1px solid ${C.border}` }}>
           {["all", "critical", "fire", "warning", "moderate", "good"].map(s => (
             <button key={s} onClick={() => setFilter(s)} style={{
@@ -324,8 +318,8 @@ const BinMonitoring = () => {
         </div>
       </div>
 
-      {/* Bin grid */}
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill,minmax(270px,1fr))", gap: 14 }}>
+      {/* Bin grid — gap 14 → 10 */}
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill,minmax(270px,1fr))", gap: 10 }}>
         {visible.map(bin => {
           const isActive  = selected?.id === bin.id;
           const tempAlert = bin.temp > 55;
@@ -365,7 +359,6 @@ const BinMonitoring = () => {
                 </div>
               </div>
 
-              {/* Action buttons — shown when card is selected */}
               {isActive && (
                 <div style={{ marginTop: 14, paddingTop: 14, borderTop: `1px solid ${C.border}`, display: "flex", gap: 8 }}>
                   <button
@@ -395,7 +388,6 @@ const BinMonitoring = () => {
         })}
       </div>
 
-      {/* Modals */}
       {detailsBin  && <DetailsModal  bin={detailsBin}  onClose={() => setDetailsBin(null)} />}
       {dispatchBin && <DispatchModal bin={dispatchBin} onClose={() => setDispatchBin(null)} />}
     </div>
